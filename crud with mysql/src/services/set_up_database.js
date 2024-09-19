@@ -22,7 +22,7 @@ class SetupDB {
     const [rows] = await this.db.promise().query('SHOW DATABASES;');
     const employeeExists = rows.some((row) => row.Database === 'employee');
     if (!employeeExists) {
-      await this.db.query('CREATE DATABASE employee;');
+      await this.db.promise().query('CREATE DATABASE employee;');
       console.log('Database "employee" created.');
     } else {
       console.log('Using existing database "employee".');

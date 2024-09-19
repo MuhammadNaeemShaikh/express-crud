@@ -4,9 +4,11 @@ const http = require('http').createServer(app);
 const cors = require('cors');
 const setupDatabase = require('./services/set_up_database');
 const db_connection = require('./utils/db_connection');
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+require('./start_up/routes')(app)
 
 const db_instance = new setupDatabase(db_connection);
 
