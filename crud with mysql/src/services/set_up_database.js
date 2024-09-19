@@ -1,6 +1,7 @@
 const db_connection = require('../utils/db_connection');
 const { create_table_add } = require('../models/add.model');
 const { create_table_user } = require('../models/user');
+const { create_blogs_table } = require('../models/blog.model');
 
 class SetupDB {
   constructor(db_instance) {
@@ -32,6 +33,16 @@ class SetupDB {
   async setupTables() {
     await this.createAddressTable();
     await this.createUserTable();
+    await this.createBlogTable();
+  }
+
+  async createBlogTable() {
+    const [rows] = await this.db.promise().query('SHOW TABLES LIKE "blog";');
+    if (rows.length === 0) {
+      await this.db.promise().query(create_blogs_table);
+    } else {
+      console.log(`Blog Table Already Exist`);
+    }
   }
 
   async createAddressTable() {
