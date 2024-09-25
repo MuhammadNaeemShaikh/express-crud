@@ -26,15 +26,17 @@ io.on('connection', (socket) => {
     });
   });
 
-  socket.on('send_message', async ({ room_id, user_id, message }) => {
-    io.to(room_id).emit('recieveMessage', {
-      success: true,
-      message: 'Successfully Get Chats',
-      data: message,
-    });
+  //Send message to only a particular user
+  socket.on('send_message', (message) => {
+    receiverChatID = message.receiverChatID;
+    senderChatID = message.senderChatID;
+    content = message.content;
 
-    socket.on('disconnect', () => {
-      console.log('Client disconnected');
+    //Send message to only that particular room
+    socket.in(receiverChatID).emit('receive_message', {
+      content: content,
+      senderChatID: senderChatID,
+      receiverChatID: receiverChatID,
     });
   });
 });
