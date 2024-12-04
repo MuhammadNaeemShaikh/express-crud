@@ -17,7 +17,6 @@ const sign_up = async (req, res) => {
       dob,
     });
 
-    console.log(validatedData);
     if (validatedData) {
       const salt = await bcrypt.genSalt(10);
       const hash_password = await bcrypt.hash(password, salt);

@@ -4,8 +4,8 @@ const { auth_routes } = require('./routes');
 const body_parser = require('body-parser');
 
 module.exports = async (app) => {
-  configDotenv();
-  db_connect(app);
+  await configDotenv();
+  await db_connect(app);
 
   app.use(body_parser.json());
   app.use(body_parser.urlencoded({ extended: false }));

@@ -15,7 +15,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon ./bootstrap.js"
+    "start": "nodemon ./src/bootstrap.js"
   },
   "keywords": [],
   "author": "",
